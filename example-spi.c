@@ -5,23 +5,18 @@
 
 #include <metal/spi.h>
 
+#ifdef metal_spi_1
+/* Get SPI 1 */
+#define spi metal_spi_1
+#else
+#ifdef metal_spi_0
+/* Fallback to SPI 0 */
+#define spi metal_spi_0
+#endif
+#endif
+
 int main() {
 	printf("METAL SPI Driver Demo\n");
-
-	struct metal_spi *spi;
-
-	/* Get SPI 1 */
-	spi = metal_spi_get_device(1);
-
-	/* Fallback to SPI 0 */
-	if(spi == NULL) {
-		spi = metal_spi_get_device(0);
-	}
-
-	if(spi == NULL) {
-		printf("Failed to get spi device\n");
-		return 1;
-	}
 
 	/* Initialize the SPI device to 100_000 baud */
 	metal_spi_init(spi, 100000);

@@ -18,6 +18,7 @@
 int main() {
 	printf("METAL SPI Driver Demo\n");
 
+#ifdef spi
 	/* Initialize the SPI device to 100_000 baud */
 	metal_spi_init(spi, 100000);
 
@@ -36,6 +37,7 @@ int main() {
 	char rx_buf[3] = {0};
 
 	metal_spi_transfer(spi, &config, 3, tx_buf, rx_buf);
+#endif
 
 	return 0;
 }
